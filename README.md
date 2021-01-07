@@ -1,1 +1,1 @@
-* A repo to practice Flask
+A repo to practice Flask
