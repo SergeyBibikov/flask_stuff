@@ -14,3 +14,8 @@ def name(name):
     if name == "John":
         return "I don't know any Johns", 400
     return render_template("user.html",name=name)
+
+@app.route("/list")
+def list():
+    f_list = ["One","Two","Three"]
+    return render_template("list.html",list=f_list)
