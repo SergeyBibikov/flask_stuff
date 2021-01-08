@@ -2,14 +2,19 @@ from flask import Flask
 from flask import request
 from flask import make_response
 from flask import render_template
+from flask_bootstrap import Bootstrap
+from flask_moment import Moment
+from datetime import datetime
 
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
+moment = Moment(app)
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html",current_time=datetime.utcnow())
 
-@app.route("/<name>")
+@app.route("/user/<name>")
 def name(name):
     if name == "John":
         return "I don't know any Johns", 400
@@ -23,3 +28,7 @@ def list():
 @app.route("/sub")
 def sub():
     return render_template("subbase.html")
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html"), 404
