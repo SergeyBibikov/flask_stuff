@@ -19,3 +19,7 @@ def name(name):
 def list():
     f_list = ["One","Two","Three"]
     return render_template("list.html",list=f_list)
+
+@app.route("/sub")
+def sub():
+    return render_template("subbase.html")
