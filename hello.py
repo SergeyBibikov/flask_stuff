@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -8,6 +9,7 @@ from datetime import datetime
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.environ(['SK'])
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 @app.route("/")
