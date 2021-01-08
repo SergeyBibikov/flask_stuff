@@ -1,13 +1,16 @@
 from flask import Flask
 from flask import request
 from flask import make_response
+from flask import render_template
+
 
 app = Flask(__name__)
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 @app.route("/<name>")
-def hello(name):
-    resp = make_response(f"Hello {name}")
-    resp.set_cookie("a cookie","a cookie value")
+def name(name):
     if name == "John":
         return "I don't know any Johns", 400
-    return resp
+    return render_template("user.html",name=name)
