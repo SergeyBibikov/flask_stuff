@@ -25,6 +25,7 @@ class Role(db.Model):
     __tablename__='roles'
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(64),unique=True)
+    users = db.relationship('User', backref='role',lazy='dynamic')
     
     def __repr__(self):
         return '<Role %r>' % self.name
@@ -33,7 +34,7 @@ class User(db.Model):
     __tablename__='users'
     id = db.Column(db.Integer,primary_key=True)
     username = db.Column(db.String(64), unique=True, index=True)
-    
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     def __repr__(self):
         return '<User %r>' % self.username
 
@@ -41,12 +42,22 @@ class User(db.Model):
 def index():
     form = NameForm()
     if form.validate_on_submit():
-        old_name = session.get('name')
-        if old_name is not None and old_name!=form.name.data:
-            flash(f"Name changed from {old_name} to {form.name.data}")
+        user = User.query.filter_by(username=form.name.data).first()
+        if user is None:
+            user = User(username=form.name.data)
+            db.session.add(user)
+            db.session.commit()
+            session['known'] = False
+            flash("New User added")
+        else:
+            session['known'] = True
         session['name'] = form.name.data
         return redirect(url_for("index"))
-    return render_template("index.html", form=form, name=session.get('name'), current_time=datetime.utcnow())
+    return render_template("index.html",
+                             form=form,
+                             name=session.get('name'),
+                             known=session.get('known', False),
+                             current_time=datetime.utcnow())
 
 @app.route("/user/<name>")
 def name(name):
@@ -65,10 +76,13 @@ def sub():
 
 @app.route("/clear")
 def clear():
-    print(help(session))
     session['name'] = None
     return redirect(url_for("index"))
 
 @app.errorhandler(404)
 def not_found(e):
     return render_template("404.html"), 404
+
+@app.shell_context_processor
+def make_shell_context():
+    return dict(db=db, User=User, Role=Role)
