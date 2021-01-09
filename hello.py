@@ -8,6 +8,7 @@ from wtforms import StringField,SubmitField
 from wtforms.validators import DataRequired
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SK')
@@ -16,6 +17,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 class NameForm(FlaskForm):
     name = StringField("What's your name?",validators=[DataRequired(message="Enter you name, please")])
