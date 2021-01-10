@@ -9,23 +9,16 @@ from wtforms.validators import DataRequired
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_mail import Mail
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SK')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-mail = Mail(app)
 
 class NameForm(FlaskForm):
     name = StringField("What's your name?",validators=[DataRequired(message="Enter you name, please")])
