@@ -1,0 +1,18 @@
+html {
+    display: block;
+}
+body {
+    background-color: #000000;
+    font: 100% "Courier New";
+    color: #84c754;
+  }
+  
+  h1 {
+    font-size: 32px;
+    text-align: left;
+  }
+  
+  p.greeting {
+    font: 50% "Courier New";
+    font-size: 20px;
+  }
