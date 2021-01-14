@@ -1,0 +1,30 @@
+html {
+    display: block;
+}
+body {
+    background-color: #000000;
+    font: 100% "Courier New";
+    color: #84c754;
+  }
+  
+h1,h3{
+    font-size: 32px;
+    text-align: left;
+}
+a{
+    color: aliceblue;
+    text-decoration: none;
+}
+a:hover{
+    color:gold;
+    text-decoration-line: underline;
+}
+.email, .password, .password2, .username{
+  font-weight: bold;
+  font-size: 15px;
+}
+
+p.greeting {
+  font: 50% "Courier New";
+  font-size: 15px;
+}
