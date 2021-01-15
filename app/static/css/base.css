@@ -19,6 +19,9 @@ a:hover{
     color:gold;
     text-decoration-line: underline;
 }
+.val_errors{
+  color:tomato;
+}
 .email, .password, .password2, .username{
   font-weight: bold;
   font-size: 15px;

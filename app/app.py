@@ -14,6 +14,8 @@ def index():
 @app.route("/register", methods=['POST','GET'])
 def register():
     form = RegistrationForm()
+    if form.validate_on_submit():
+        print("dfsdf")
     return render_template("registration.html",form=form)
 
 @app.route("/pass", methods=['POST','GET'])
