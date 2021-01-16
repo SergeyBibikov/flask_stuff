@@ -9,5 +9,6 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         session['user']=form.username.data
+        print(f"The user {session.get('user')} has successfully logged in!")
         return redirect("home")
     return render_template("login.html",form=form)

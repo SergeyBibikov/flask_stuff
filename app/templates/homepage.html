@@ -1,6 +1,8 @@
 {%extends "index.html"%}
 {%block body%}
 <h1>Welcome to this tiny flask powered site!</h1>
-<button id="signup" ><a href="/register">Sign up</a></button>
-<button id="login" ><a id="login" href="/login">Log in</a></button>
+{%if not session.get("user")%}
+    <button id="signup" ><a href="/register">Sign up</a></button>
+    <button id="login" ><a id="login" href="/login">Log in</a></button>
+{%endif%}
 {%endblock%}
