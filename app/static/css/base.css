@@ -1,6 +1,13 @@
 html {
     display: block;
 }
+footer{
+  height: 0px;
+  text-align: right;
+}
+.footer{
+  font: 85% "Verdana";
+}
 body {
     background-color: #000000;
     font: 100% "Courier New";

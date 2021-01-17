@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic HTML</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='./css/base.css')}}"" >
+    <title>TinyApp</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='./css/base.css')}}" >
     <link rel="shortcut icon" href={{url_for('static', filename='favicon.ico')}} type="image/x-icon">
 </head>
 <body>
+    <footer>
+        {%block footer%}
+        <a class="footer" href="/home">Home</a>
+        {%if session.get('user')%}
+            <a class="footer" href="/logout">Logout</a>
+        {%endif%}
+        {%if session.get('role')=='ADMIN' and url_for(request.endpoint) !='/manufacturers'%}
+            <a class="footer" href="/manufacturers">Manufacturers</a>
+        {%endif%}
+        {%endblock%}
+    </footer>
     {% block body %}
 
     {% endblock %}

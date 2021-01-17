@@ -7,7 +7,7 @@ class User(db.Model):
     email = db.Column(db.String,nullable=False)
     username = db.Column(db.String,nullable=False)
     password = db.Column(db.String,nullable=False)
-    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'), nullable=False,default=2)
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'), nullable=False, default=1)
 
 class Role(db.Model):
     __tablename__='roles'
@@ -23,6 +23,7 @@ class Product(db.Model):
     __tablename__='products'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String,nullable=False)
+    country_of_origin = db.Column(db.String)
     manufacturer_id = db.Column(db.Integer, db.ForeignKey('manufacturers.id'),
         nullable=False)
 
