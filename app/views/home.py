@@ -6,3 +6,9 @@ home = Blueprint('home',__name__)
 @home.route("/",methods=['GET'])
 def index():
     return render_template("homepage.html")
+
+@home.route("/populate")
+def populate():
+    from .. import db
+    db.create_all()
+    return "Ok"

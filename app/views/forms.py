@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired,DataRequired, Email, EqualTo, ValidationError
-from ..models import Users
+from ..models import User
 from ..utils.passw_hash import is_passw_correct
 
 class RegistrationForm(FlaskForm):
@@ -17,11 +17,11 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField("Submit")
 
     def validate_username(self,username):
-        if Users.query.filter_by(username=self.username.data).first():
+        if User.query.filter_by(username=self.username.data).first():
             raise ValidationError("Пользователь с таким именем уже существует")
 
     def validate_email(self,email):
-        if Users.query.filter_by(email=self.email.data).first():
+        if User.query.filter_by(email=self.email.data).first():
             raise ValidationError("Пользователь с таким адресом электронной почты уже существует")
 
 class LoginForm(FlaskForm):
@@ -32,12 +32,12 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Log in")
 
     def validate_username(self,irrelevant):
-        if not Users.query.filter_by(username=self.username.data).first():
+        if not User.query.filter_by(username=self.username.data).first():
             raise ValidationError("Некорректное имя пользователя или пароль")
 
     def validate_password(self,irrelevant):
         try:
-            password = Users.query.filter_by(username=self.username.data).first().password
+            password = User.query.filter_by(username=self.username.data).first().password
         except:
             raise ValidationError("Некорректное имя пользователя или пароль")
         if not is_passw_correct(password,self.password.data):
