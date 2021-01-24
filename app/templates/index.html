@@ -24,13 +24,10 @@
             </div>    
             {%endif%}
         </div>
-        {%if session.get('role')=='ADMIN' and url_for(request.endpoint) !='/manufacturers'%}
-        <a class="footer" href="/manufacturers">Производители</a>
-        {%endif%}
- 
 
         {%endblock%}
     </header>
+
     {% block body %}
 
     {% endblock %}

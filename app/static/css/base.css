@@ -24,25 +24,46 @@ h1{
     font-size: 3.2rem;
     text-align: left;
 }
+h3{
+  font-size: 2rem;
+}
+li{
+  list-style: none;
+}
 a{
     font-size: 1.6rem;
     color: aliceblue;
     text-decoration: none;
 }
-button{
+button,input#submit{
   width: 10%;
   background-color: black;
   color:#adff2f;
-  border-color: #adff2f;
+  border: 0.1rem solid #adff2f;
+  border-radius: 7%;
 }
-a:hover{
+input#submit:focus{
+  outline: #adff2f;
+}
+.manuf_link{
+  color:antiquewhite;
+}
+
+a:hover,input#submit:hover{
     color:gold;
     text-decoration-line: underline;
 }
 .val_errors{
   color:tomato;
+  font-size: 1.6rem;
 }
 .email, .password, .password2, .username{
   font-weight: bold;
   font-size: 1.6rem;
+}
+div.admin_panel{
+  width: 15rem;
+  font-weight: 800;
+  position: absolute;
+  right: 5%;
 }

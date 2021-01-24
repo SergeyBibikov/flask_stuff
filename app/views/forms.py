@@ -29,7 +29,7 @@ class LoginForm(FlaskForm):
         validators = [DataRequired(message="Пожалуйста, введите имя пользователя")])
     password = PasswordField("Password",
         validators = [DataRequired(message="Пожалуйста, введите пароль")])
-    submit = SubmitField("Log in")
+    submit = SubmitField("Войти")
 
     def validate_username(self,irrelevant):
         if not User.query.filter_by(username=self.username.data).first():

@@ -1,8 +1,15 @@
 {%extends "index.html"%}
 {%block body%}
-<h1>Welcome to this tiny flask powered site!</h1>
 {%if not session.get("user")%}
-    <button id="signup" ><a href="/register">Sign up</a></button>
-    <button id="login" ><a id="login" href="/login">Log in</a></button>
+    <button id="signup" ><a href="/register">Регистрация</a></button>
+    <button id="login" ><a href="/login">Вход</a></button>
+{%endif%}
+{%if session.get('role')=='ADMIN' and url_for(request.endpoint) !='/manufacturers'%}
+<div class="admin_panel">
+    <ul>
+        <li><a class="manuf_link" href="/manufacturers">Производители</a></li>
+        <li><a class="products_link" href="/products">Продукты</a></li>
+    </ul>
+</div>
 {%endif%}
 {%endblock%}
