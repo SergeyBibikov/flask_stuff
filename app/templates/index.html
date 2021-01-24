@@ -8,17 +8,29 @@
     <link rel="shortcut icon" href={{url_for('static', filename='favicon.ico')}} type="image/x-icon">
 </head>
 <body>
-    <footer>
-        {%block footer%}
-        <a class="footer" href="/home">Home</a>
-        {%if session.get('user')%}
-            <a class="footer" href="/logout">Logout</a>
-        {%endif%}
+    <header>
+        <div class="logo">
+            <img src="{{url_for('static',filename='./images/logo.svg')}}" alt="Dummy">
+        </div>
+        {%block header%}
+       
+        <div class="home_logout">
+            <div class="home">
+                <a href="/home"><img src="{{url_for('static',filename='./images/home.svg')}}" alt="Домой"></a>
+            </div>
+            {%if session.get('user')%}
+            <div class="logout">
+                <a href="/logout"><img src="{{url_for('static',filename='./images/logout.svg')}}" alt="Выйти"></a>
+            </div>    
+            {%endif%}
+        </div>
         {%if session.get('role')=='ADMIN' and url_for(request.endpoint) !='/manufacturers'%}
-            <a class="footer" href="/manufacturers">Manufacturers</a>
+        <a class="footer" href="/manufacturers">Производители</a>
         {%endif%}
+ 
+
         {%endblock%}
-    </footer>
+    </header>
     {% block body %}
 
     {% endblock %}

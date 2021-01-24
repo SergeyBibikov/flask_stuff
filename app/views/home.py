@@ -1,3 +1,4 @@
+from app.models import Role
 from flask import Blueprint,render_template
 
 home = Blueprint('home',__name__)
@@ -10,5 +11,9 @@ def index():
 @home.route("/populate")
 def populate():
     from .. import db
+    from ..models import Role
     db.create_all()
+    db.session.add(Role(name='USER'))
+    db.session.add(Role(name='ADMIN'))
+    db.session.commit()
     return "Ok"
