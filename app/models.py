@@ -31,4 +31,11 @@ class Manufacturer(db.Model):
     __tablename__='manufacturers'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String,nullable=False)
-    products_rel=db.relationship('Product',backref='manufacturer')
+    legal_form_id = db.Column(db.Integer,db.ForeignKey('legalforms.id'))
+    products_rel=db.relationship('Product',backref='manufacturer',lazy="dynamic")
+
+class LegalForm(db.Model):
+    __tablename__='legalforms'
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    name = db.Column(db.String)
+    legal_forms_rel=db.relationship('Manufacturer',backref='legal_form',lazy="dynamic")

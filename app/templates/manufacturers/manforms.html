@@ -16,4 +16,9 @@
         <span class="val_errors">{{error}}</span>
     {%endfor%}
     {{ form_add.add() }}
+    <ul class="flashes">
+        {%for message in get_flashed_messages()%}
+            <li>{{message}}</li>
+        {%endfor%}
+    </ul>
 </form>
