@@ -1,5 +1,5 @@
-<ul>
+<ul class="list-of-manuf">
     {%for man in manufacturers_list%}
-    <li>{{man.legal_form_id}} {{man.name}}</li>
+    <li class="manuf-list-point">{{man.name}} {{man.legal_form.name}} <button>Edit</button></li>
     {%endfor%}
 </ul>

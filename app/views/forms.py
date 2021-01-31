@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, SelectField
 from wtforms.validators import InputRequired,DataRequired, Email, EqualTo, ValidationError
 from ..models import User
 from ..utils.passw_hash import is_passw_correct
@@ -44,11 +44,10 @@ class LoginForm(FlaskForm):
             raise ValidationError("Некорректное имя пользователя или пароль")
 
 class ManufacturerSearchForm(FlaskForm):
-    manuf_name_search = StringField("Manufacturer search", validators = [DataRequired("Необходимо указать название производителя")])
-    find = SubmitField("Find")
-    edit = SubmitField("Edit")
-    delete = SubmitField("Delete")
+    manuf_name_search = StringField("Manufacturer search", validators=[InputRequired("Введите строку для поиска")])
+    find = SubmitField("Найти")
 
 class ManufacturerAddForm(FlaskForm):
-    manuf_name_add = StringField("Add manufacturer", validators = [DataRequired("Необходимо указать название производителя")])
-    add = SubmitField("Add")
+    manuf_name_add = StringField("Название производителя", validators = [InputRequired("Необходимо указать название производителя")])
+    manuf_legal_form = SelectField("Форма регистрации")
+    add = SubmitField("Добавить")

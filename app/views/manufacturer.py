@@ -3,26 +3,35 @@ from .forms import ManufacturerSearchForm,ManufacturerAddForm
 from ..utils.helpers import is_admin
 manufacturers = Blueprint('manufacturers',__name__)
 
-from ..models import Manufacturer
+from ..models import Manufacturer, LegalForm
 from .. import db
 
 @manufacturers.route("/manufacturers",methods=["GET", "POST"])
 @is_admin
 def manu_facturers():
     form_search = ManufacturerSearchForm()
+    legal_forms = LegalForm.query.all()
     form_add = ManufacturerAddForm()
-    if form_search.validate_on_submit():
-        manuf_list = Manufacturer.query.filter_by(name=form_search.manuf_name_search.data)
+    form_add.manuf_legal_form.choices = [(i.id,i.name) for i in legal_forms]
+    if form_search.find.data and form_search.validate():
+        if form_search.manuf_name_search.data not in (None,""):
+            search=f"%{form_search.manuf_name_search.data}%"
+        else:
+            search=""
+        manuf_list = Manufacturer.query.filter(Manufacturer.name.like(search)).all()
         return render_template("manufacturers/manufacturers.html",
                                 form_search=form_search,
                                 form_add=form_add,
                                 manufacturers_list=manuf_list)
-    if form_add.validate_on_submit():
+
+    if form_add.add.data and form_add.validate():
         manuf = Manufacturer(name=form_add.manuf_name_add.data)
         db.session.add(manuf)
         db.session.commit()
         flash("Производитель добавлен")
-    return render_template("manufacturers/manufacturers.html",form_search=form_search, form_add=form_add)
+    return render_template("manufacturers/manufacturers.html",
+                        form_search=form_search,
+                        form_add=form_add)
 
 @manufacturers.route("/manufacturers/<manufacturer_name>")
 @is_admin

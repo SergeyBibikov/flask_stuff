@@ -35,8 +35,39 @@ a{
     color: aliceblue;
     text-decoration: none;
 }
+.buttons{
+  position: relative;
+  width: 20%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.list-of-manuf{
+  margin-top: 3px;
+}
+.manuf-list-point,.flashes{
+  font-size: 1.6rem;
+  font-weight:500;
+}
+.add-fields{
+  display: flex;
+}
+.add-fields .add-button{
+  position: relative;
+  align-self: center;
+}
+.manuf-name,.manuf-legal-form{
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+.manuf-legal-form{
+  margin:0 2px 0 2px;
+  width: 17%;
+}
+.add-manuf-form{
+  margin-bottom: 3px;
+}
 button,input#submit{
-  width: 10%;
   background-color: black;
   color:#adff2f;
   border: 0.1rem solid #adff2f;
@@ -54,7 +85,7 @@ a:hover,input#submit:hover{
     text-decoration-line: underline;
 }
 .val_errors{
-  color:tomato;
+  color:coral;
   font-size: 1.6rem;
 }
 .email, .password, .password2, .username{

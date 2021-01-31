@@ -1,8 +1,10 @@
 {%extends "index.html"%}
 {%block body%}
 {%if not session.get("user")%}
-    <button id="signup" ><a href="/register">Регистрация</a></button>
-    <button id="login" ><a href="/login">Вход</a></button>
+    <div class="buttons">
+        <button id="signup" ><a href="/register">Регистрация</a></button>
+        <button id="login" ><a href="/login">Вход</a></button>
+    </div>
 {%endif%}
 {%if session.get('role')=='ADMIN' and url_for(request.endpoint) !='/manufacturers'%}
 <div class="admin_panel">
