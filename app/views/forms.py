@@ -44,6 +44,7 @@ class LoginForm(FlaskForm):
             raise ValidationError("Некорректное имя пользователя или пароль")
 
 class ManufacturerSearchForm(FlaskForm):
+    search_filter = SelectField(choices=["Начинается с","Содержит","Заканчивается на","Все"])
     manuf_name_search = StringField("Manufacturer search", validators=[InputRequired("Введите строку для поиска")])
     find = SubmitField("Найти")
 
@@ -51,3 +52,9 @@ class ManufacturerAddForm(FlaskForm):
     manuf_name_add = StringField("Название производителя", validators = [InputRequired("Необходимо указать название производителя")])
     manuf_legal_form = SelectField("Форма регистрации")
     add = SubmitField("Добавить")
+
+class ManufacturerEditForm(FlaskForm):
+    manuf_enter_name = StringField("Название", validators = [InputRequired("Необходимо указать название производителя")])
+    edit_name = SubmitField("Изменить название")
+    manuf_legal_form = SelectField("Форма регистрации")
+    edit_legal_form = SubmitField("Изменить форму регистрации")

@@ -1,7 +1,9 @@
 <form method="POST" novalidate>
     {{ form_search.hidden_tag() }}
     <br><span class="username">{{ form_search.manuf_name_search.label }}</span>
-    <br>{{ form_search.manuf_name_search }}
+    
+    <br>{{form_search.search_filter}}{{ form_search.manuf_name_search }}
+
     {%for error in form_search.manuf_name_search.errors%}
         <span class="val_errors">{{error}}</span>
     {%endfor%}

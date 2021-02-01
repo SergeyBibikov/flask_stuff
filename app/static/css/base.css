@@ -5,12 +5,13 @@
 
 html {
   font-size: 62.5%;
-  color:#adff2f;
-  background-color: #000000;
+  color:#ADEFD1FF;
+  background-color: #00203FFF;
   font-family: "Courier New";
 }
 header{
-  height: 6vh;
+  background-color: rgb(8, 6, 39);
+  height: 10%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 2rem;
@@ -30,14 +31,10 @@ h3{
 li{
   list-style: none;
 }
-a{
-    font-size: 1.6rem;
-    color: aliceblue;
-    text-decoration: none;
-}
+
 .buttons{
   position: relative;
-  width: 20%;
+  width: 15%;
   display: flex;
   justify-content: space-evenly;
 }
@@ -67,23 +64,22 @@ a{
 .add-manuf-form{
   margin-bottom: 3px;
 }
-button,input#submit{
-  background-color: black;
-  color:#adff2f;
-  border: 0.1rem solid #adff2f;
-  border-radius: 7%;
+div.admin_panel{
+  width: 15rem;
+  font-weight: 800;
+  position: absolute;
+  right: 5%;
 }
-input#submit:focus{
-  outline: #adff2f;
-}
-.manuf_link{
+ul.nav-links li a{
+  font-size: 1.6rem;
   color:antiquewhite;
+  text-decoration: none;
 }
 
-a:hover,input#submit:hover{
-    color:gold;
-    text-decoration-line: underline;
+ul.nav-links li a:hover{
+  text-decoration: underline;
 }
+
 .val_errors{
   color:coral;
   font-size: 1.6rem;
@@ -92,9 +88,4 @@ a:hover,input#submit:hover{
   font-weight: bold;
   font-size: 1.6rem;
 }
-div.admin_panel{
-  width: 15rem;
-  font-weight: 800;
-  position: absolute;
-  right: 5%;
-}
+

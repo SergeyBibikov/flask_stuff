@@ -2,13 +2,13 @@
 {%block body%}
 {%if not session.get("user")%}
     <div class="buttons">
-        <button id="signup" ><a href="/register">Регистрация</a></button>
-        <button id="login" ><a href="/login">Вход</a></button>
+        <button id="signup" type="submit"><a href="/register">Регистрация</a></button>
+        <button id="login" type="submit"><a href="/login">Вход</a></button>
     </div>
 {%endif%}
 {%if session.get('role')=='ADMIN' and url_for(request.endpoint) !='/manufacturers'%}
 <div class="admin_panel">
-    <ul>
+    <ul class="nav-links">
         <li><a class="manuf_link" href="/manufacturers">Производители</a></li>
         <li><a class="products_link" href="/products">Продукты</a></li>
     </ul>
