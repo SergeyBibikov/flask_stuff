@@ -14,11 +14,7 @@ class Role(db.Model):
     __tablename__='roles'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String,nullable=False)
-<<<<<<< HEAD
-    user_rel= db.relationship('User',backref='role',lazy="joined")
-=======
     user_rel= db.relationship('User',backref='role', lazy='joined')
->>>>>>> 4f3ccfc8bbc50e8fdd09f7d6288365e98350d00f
 
 favourites = db.Table('favourites',
     db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
