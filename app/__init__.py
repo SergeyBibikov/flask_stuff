@@ -2,11 +2,8 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-<<<<<<< HEAD
 from flask_login import LoginManager, login_manager
-=======
 from flask_debugtoolbar import DebugToolbarExtension
->>>>>>> 4f3ccfc8bbc50e8fdd09f7d6288365e98350d00f
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')

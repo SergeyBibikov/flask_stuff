@@ -1,24 +1,16 @@
-<<<<<<< HEAD
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template,flash,redirect,url_for
 from flask_login import login_required
-from .forms import ManufacturerSearchForm,ManufacturerAddForm
-from ..utils.helpers import is_admin
-manufacturers = Blueprint('manufacturers',__name__)
-
-@manufacturers.route("/manufacturers")
-@login_required
-=======
-from flask import Blueprint, render_template, flash,redirect,url_for
-from .forms import ManufacturerSearchForm,ManufacturerAddForm,ManufacturerEditForm
 from sqlalchemy import func
+from .forms import ManufacturerSearchForm,ManufacturerAddForm,ManufacturerEditForm
 from ..utils.helpers import is_admin
+
 manufacturers = Blueprint('manufacturers',__name__)
 
 from ..models import Manufacturer, LegalForm
 from .. import db
 
 @manufacturers.route("/manufacturers",methods=["GET", "POST"])
->>>>>>> 4f3ccfc8bbc50e8fdd09f7d6288365e98350d00f
+@login_required
 @is_admin
 def manu_facturers():
     form_search = ManufacturerSearchForm()
