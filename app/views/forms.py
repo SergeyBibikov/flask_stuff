@@ -55,6 +55,5 @@ class ManufacturerAddForm(FlaskForm):
 
 class ManufacturerEditForm(FlaskForm):
     manuf_enter_name = StringField("Название", validators = [InputRequired("Необходимо указать название производителя")])
-    edit_name = SubmitField("Изменить название")
     manuf_legal_form = SelectField("Форма регистрации")
-    edit_legal_form = SubmitField("Изменить форму регистрации")
+    edit_manuf = SubmitField("Изменить данные производителя")

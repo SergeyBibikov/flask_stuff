@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, flash
+from flask import Blueprint, render_template, flash,redirect,url_for
 from .forms import ManufacturerSearchForm,ManufacturerAddForm,ManufacturerEditForm
 from sqlalchemy import func
 from ..utils.helpers import is_admin
@@ -44,7 +44,7 @@ def manu_facturers():
             return render_template("manufacturers/manufacturers.html",
                         form_search=form_search,
                         form_add=form_add)
-        manuf = Manufacturer(name=form_add.manuf_name_add.data,legal_form_id=form_add.manuf_legal_form.data)
+        manuf = Manufacturer(name=form_add.manuf_name_add.data.strip(),legal_form_id=form_add.manuf_legal_form.data)
         db.session.add(manuf)
         db.session.commit()
         flash("Производитель добавлен")
@@ -52,9 +52,18 @@ def manu_facturers():
                         form_search=form_search,
                         form_add=form_add)
 
-@manufacturers.route("/manufacturers/<manufacturer_name>")
+@manufacturers.route("/manufacturers/<manufacturer_name>",methods=['GET','POST'])
 @is_admin
 def edit_manufacturer(manufacturer_name):
     form_edit = ManufacturerEditForm()
+    legal_forms = LegalForm.query.all()
+    form_edit.manuf_legal_form.choices= [(i.id,i.name) for i in legal_forms]
     manufacturer = Manufacturer.query.filter_by(name=manufacturer_name).first()
+    if not manufacturer:
+        return redirect(url_for('.manu_facturers'))
+    if form_edit.validate_on_submit():
+        manufacturer.name = form_edit.manuf_enter_name.data
+        manufacturer.legal_form_id = form_edit.manuf_legal_form.data
+        db.session.add(manufacturer)
+        db.session.commit()
     return render_template("manufacturers/manufacturer_page.html",manufacturer=manufacturer,form_edit=form_edit)

@@ -1,6 +1,14 @@
 {%extends "index.html"%}
 {%block body%}
-<h3>{{manufacturer.legal_form.name}} {{manufacturer.name}}</h3>
-{{form_edit.manuf_enter_name.label}}{{form_edit.manuf_enter_name}}{{form_edit.edit_name}}
-{{form_edit.manuf_legal_form.label}}{{form_edit.manuf_legal_form}}{{form_edit.edit_legal_form}}
+<h2>Для изменения названия и формы организации укажите новые значения. Для сохранения - старые</h3>
+<h2>Текущее наименование: {{manufacturer.legal_form.name}} {{manufacturer.name}}</h2>
+<form method="POST" novalidate>
+{{form_edit.hidden_tag()}}
+{{form_edit.manuf_enter_name.label}}{{form_edit.manuf_enter_name}}
+{{form_edit.manuf_legal_form.label}}{{form_edit.manuf_legal_form}}
+{{form_edit.edit_manuf}}
+{%for error in form_edit.manuf_enter_name.errors%}
+<p class="val_errors">{{error}}</p>
+{%endfor%}
+</form>
 {%endblock%}

@@ -82,7 +82,7 @@ ul.nav-links li a:hover{
 
 .val_errors{
   color:coral;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 .email, .password, .password2, .username{
   font-weight: bold;
