@@ -14,7 +14,11 @@ class Role(db.Model):
     __tablename__='roles'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String,nullable=False)
+<<<<<<< HEAD
     user_rel= db.relationship('User',backref='role',lazy="joined")
+=======
+    user_rel= db.relationship('User',backref='role', lazy='joined')
+>>>>>>> 4f3ccfc8bbc50e8fdd09f7d6288365e98350d00f
 
 favourites = db.Table('favourites',
     db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
@@ -32,4 +36,11 @@ class Manufacturer(db.Model):
     __tablename__='manufacturers'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String,nullable=False)
-    products_rel=db.relationship('Product',backref='manufacturer')
+    legal_form_id = db.Column(db.Integer,db.ForeignKey('legalforms.id'))
+    products_rel=db.relationship('Product',backref='manufacturer',lazy="joined")
+
+class LegalForm(db.Model):
+    __tablename__='legalforms'
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    name = db.Column(db.String)
+    legal_forms_rel=db.relationship('Manufacturer',backref='legal_form',lazy="joined")

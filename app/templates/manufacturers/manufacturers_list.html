@@ -1,0 +1,9 @@
+<ul class="list-of-manuf">
+    {%for man in manufacturers_list%}
+    <li class="manuf-list-point">
+        <form method="GET" action="{{url_for('.edit_manufacturer',manufacturer_name=man.name)}}">
+            {{man.name}} {{man.legal_form.name}} <button type="submit">Edit</button>
+        </form>
+    </li>
+    {%endfor%}
+</ul>

@@ -2,13 +2,19 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+<<<<<<< HEAD
 from flask_login import LoginManager, login_manager
+=======
+from flask_debugtoolbar import DebugToolbarExtension
+>>>>>>> 4f3ccfc8bbc50e8fdd09f7d6288365e98350d00f
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PERMANENT_SESSION_LIFETIME'] =  int(os.getenv('SESSION_LT'))
 app.secret_key=os.getenv('SK')
+toolbar = DebugToolbarExtension(app)
+app.config['DEBUG_TB_TEMPLATE_EDITOR_ENABLED'] = True
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login_manager = LoginManager()
