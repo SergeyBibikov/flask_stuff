@@ -1,10 +1,12 @@
 {%extends "index.html"%}
 {%block body%}
-{%if not session.get("user")%}
+{%if not current_user.is_authenticated%}
     <button id="signup" ><a href="/register">Регистрация</a></button>
     <button id="login" ><a href="/login">Вход</a></button>
 {%endif%}
-{%if session.get('role')=='ADMIN' and url_for(request.endpoint) !='/manufacturers'%}
+{%if current_user.is_authenticated and 
+     session.get('role')=='ADMIN'
+     and url_for(request.endpoint) !='/manufacturers'%}
 <div class="admin_panel">
     <ul>
         <li><a class="manuf_link" href="/manufacturers">Производители</a></li>

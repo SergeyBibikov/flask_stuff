@@ -1,9 +1,11 @@
 from flask import Blueprint, render_template
+from flask_login import login_required
 from .forms import ManufacturerSearchForm,ManufacturerAddForm
 from ..utils.helpers import is_admin
 manufacturers = Blueprint('manufacturers',__name__)
 
 @manufacturers.route("/manufacturers")
+@login_required
 @is_admin
 def manu_facturers():
     form_search = ManufacturerSearchForm()

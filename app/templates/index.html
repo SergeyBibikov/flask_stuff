@@ -18,7 +18,7 @@
             <div class="home">
                 <a href="/home"><img src="{{url_for('static',filename='./images/home.svg')}}" alt="Домой"></a>
             </div>
-            {%if session.get('user')%}
+            {%if current_user.is_authenticated%}
             <div class="logout">
                 <a href="/logout"><img src="{{url_for('static',filename='./images/logout.svg')}}" alt="Выйти"></a>
             </div>    

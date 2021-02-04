@@ -1,7 +1,8 @@
 from sqlalchemy.orm import backref
+from flask_login import UserMixin
 from . import db
 
-class User(db.Model):
+class User(db.Model,UserMixin):
     __tablename__='users'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     email = db.Column(db.String,nullable=False)
@@ -13,7 +14,7 @@ class Role(db.Model):
     __tablename__='roles'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String,nullable=False)
-    user_rel= db.relationship('User',backref='role')
+    user_rel= db.relationship('User',backref='role',lazy="joined")
 
 favourites = db.Table('favourites',
     db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
