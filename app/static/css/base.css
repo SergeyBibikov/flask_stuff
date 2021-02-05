@@ -9,6 +9,42 @@ html {
   background-color: #00203FFF;
   font-family: "Courier New";
 }
+body{
+  font-size: 1.6rem;
+}
+a{
+  font-size: 1.6rem;
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: underline;
+}
+.form-manuf-edit{
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-section-container{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#to-search{
+  margin-top: 50px;
+  position: relative;
+  width: 40%;
+  align-self: center;
+}
+.form-manuf-edit label, #conf-check-cont{
+  margin: 5px 0 5px 0;
+}
+#manuf_legal_form{
+  position: relative;
+  width: 35%;
+}
+
 header{
   background-color: rgb(8, 6, 39);
   height: 10%;
@@ -25,9 +61,7 @@ h1{
     font-size: 3.2rem;
     text-align: left;
 }
-h3{
-  font-size: 2rem;
-}
+
 li{
   list-style: none;
 }

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, SelectField,BooleanField
 from wtforms.validators import InputRequired,DataRequired, Email, EqualTo, ValidationError
 from ..models import User
 from ..utils.passw_hash import is_passw_correct
@@ -54,6 +54,7 @@ class ManufacturerAddForm(FlaskForm):
     add = SubmitField("Добавить")
 
 class ManufacturerEditForm(FlaskForm):
-    manuf_enter_name = StringField("Название", validators = [InputRequired("Необходимо указать название производителя")])
-    manuf_legal_form = SelectField("Форма регистрации")
+    manuf_enter_name = StringField("Новое название")
+    manuf_legal_form = SelectField("Форма регистрации (выберите либо новую, либо текущую)")
+    confirm_checkbox = BooleanField("Подтвердить изменение производителя")
     edit_manuf = SubmitField("Изменить данные производителя")

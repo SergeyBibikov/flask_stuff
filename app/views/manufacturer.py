@@ -64,9 +64,15 @@ def edit_manufacturer(manufacturer_name):
     manufacturer = Manufacturer.query.filter_by(name=manufacturer_name).first()
     if not manufacturer:
         return redirect(url_for('.manu_facturers'))
+
     if form_edit.validate_on_submit():
-        manufacturer.name = form_edit.manuf_enter_name.data
+        if not form_edit.manuf_enter_name.data:
+            manufacturer.name=manufacturer.name    
+        else:
+            manufacturer.name = form_edit.manuf_enter_name.data
         manufacturer.legal_form_id = form_edit.manuf_legal_form.data
         db.session.add(manufacturer)
         db.session.commit()
+        flash("Производитель изменён")
+        return redirect(url_for('.edit_manufacturer',manufacturer_name=manufacturer.name))
     return render_template("manufacturers/manufacturer_page.html",manufacturer=manufacturer,form_edit=form_edit)

@@ -5,25 +5,33 @@ from flask_migrate import Migrate
 from flask_login import LoginManager, login_manager
 from flask_debugtoolbar import DebugToolbarExtension
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['PERMANENT_SESSION_LIFETIME'] =  int(os.getenv('SESSION_LT'))
-app.secret_key=os.getenv('SK')
-toolbar = DebugToolbarExtension(app)
-app.config['DEBUG_TB_TEMPLATE_EDITOR_ENABLED'] = True
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+db = SQLAlchemy()
+migrate = Migrate()
 login_manager = LoginManager()
-login_manager.init_app(app)
+toolbar = DebugToolbarExtension()
 
-from .views.registration import registration
-from .views.home import home
-from .views.auth import auth
-from .views.manufacturer import manufacturers
+def create_app():
+    app = Flask(__name__)
+    app.config.from_envvar("FLASK_CONFIG")
+    app.config['PERMANENT_SESSION_LIFETIME'] =  int(os.getenv('SESSION_LT'))
 
-app.register_blueprint(registration)
-app.register_blueprint(home)
-app.register_blueprint(auth)
-app.register_blueprint(manufacturers)
+    toolbar.init_app(app)
+    db.init_app(app)
+    migrate.init_app(app,db)
+    login_manager.init_app(app)
+
+    with app.app_context():
+        from .views.registration import registration
+        from .views.home import home
+        from .views.auth import auth
+        from .views.manufacturer import manufacturers
+
+        app.register_blueprint(registration)
+        app.register_blueprint(home)
+        app.register_blueprint(auth)
+        app.register_blueprint(manufacturers)
+
+        return app
+
+
 

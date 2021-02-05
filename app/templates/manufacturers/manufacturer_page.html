@@ -1,14 +1,35 @@
 {%extends "index.html"%}
+{%block head%}
+    {{super()}}   
+{%endblock%}
 {%block body%}
-<h2>Для изменения названия и формы организации укажите новые значения. Для сохранения - старые</h3>
-<h2>Текущее наименование: {{manufacturer.legal_form.name}} {{manufacturer.name}}</h2>
-<form method="POST" novalidate>
-{{form_edit.hidden_tag()}}
-{{form_edit.manuf_enter_name.label}}{{form_edit.manuf_enter_name}}
-{{form_edit.manuf_legal_form.label}}{{form_edit.manuf_legal_form}}
-{{form_edit.edit_manuf}}
-{%for error in form_edit.manuf_enter_name.errors%}
-<p class="val_errors">{{error}}</p>
-{%endfor%}
+<div class="edit-section-container">
+    <section id="main">
+        <h2>Текущее наименование: {{manufacturer.legal_form.name}} {{manufacturer.name}}</h2>
+        <form class="form-manuf-edit" method="POST" novalidate>
+        {{form_edit.hidden_tag()}}
+        {{form_edit.manuf_enter_name.label}}{{form_edit.manuf_enter_name}}
+        {{form_edit.manuf_legal_form.label}}{{form_edit.manuf_legal_form}}
+        <div id="conf-check-cont">{{form_edit.confirm_checkbox}}{{form_edit.confirm_checkbox.label}}</div>
+        {{form_edit.edit_manuf(disabled=True)}}
+
+        {%for error in form_edit.manuf_enter_name.errors%}
+        <p class="val_errors">{{error}}</p>
+        {%endfor%}
+        <ul>
+        {%for message in get_flashed_messages()%}
+        
+            <li class="flashes">{{message}}</li>
+        
+        {%endfor%}
+        </ul>
+        <button id="to-search"><a href="{{url_for('.manu_facturers')}}">К поиску производителей</a></button>
+    </section>
+    
+</div>
+
 </form>
+{%block scripts%}
+<script src="{{url_for('static', filename='./js/checkbox.js')}}"></script> 
+{%endblock%}
 {%endblock%}
