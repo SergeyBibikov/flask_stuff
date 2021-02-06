@@ -41,7 +41,8 @@ def manu_facturers():
         return render_template("manufacturers/manufacturers.html",
                                 form_search=form_search,
                                 form_add=form_add,
-                                manufacturers_list=manuf_list)
+                                manufacturers_list=manuf_list,
+                                man_num=len(manuf_list))
     # Форма добавления
     if form_add.add.data and form_add.validate():
         if Manufacturer.query.filter_by(name=form_add.manuf_name_add.data).first():
@@ -69,7 +70,7 @@ def edit_manufacturer(manufacturer_name):
     if not manufacturer:
         return redirect(url_for('.manu_facturers'))
 
-    if form_edit.validate_on_submit():
+    if form_edit.edit_manuf.data:
         if not form_edit.manuf_enter_name.data:
             manufacturer.name=manufacturer.name    
         else:
@@ -77,6 +78,13 @@ def edit_manufacturer(manufacturer_name):
         manufacturer.legal_form_id = form_edit.manuf_legal_form.data
         db.session.add(manufacturer)
         db.session.commit()
+        print(form_edit.delete_manuf.data)
         flash("Производитель изменён")
         return redirect(url_for('.edit_manufacturer',manufacturer_name=manufacturer.name))
+    if form_edit.delete_manuf.data:
+        manufacturer = Manufacturer.query.filter_by(name=manufacturer_name).first()
+        db.session.delete(manufacturer)
+        db.session.commit()
+        flash("Производитель удалён")
+        return redirect(url_for('.manu_facturers'))
     return render_template("manufacturers/manufacturer_page.html",manufacturer=manufacturer,form_edit=form_edit)

@@ -12,6 +12,9 @@
         {{form_edit.manuf_legal_form.label}}{{form_edit.manuf_legal_form}}
         <div id="conf-check-cont">{{form_edit.confirm_checkbox}}{{form_edit.confirm_checkbox.label}}</div>
         {{form_edit.edit_manuf(disabled=True)}}
+        <div id="conf-check-cont1">{{form_edit.confirm_delete_checkbox}}{{form_edit.confirm_delete_checkbox.label}}</div>
+        {{form_edit.delete_manuf(disabled=True)}}
+
 
         {%for error in form_edit.manuf_enter_name.errors%}
         <p class="val_errors">{{error}}</p>

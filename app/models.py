@@ -9,6 +9,8 @@ class User(db.Model,UserMixin):
     username = db.Column(db.String,nullable=False)
     password = db.Column(db.String,nullable=False)
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'), nullable=False, default=1)
+    def __repr__(self):
+        return "User (id=%s)" % self.id
 
 class Role(db.Model):
     __tablename__='roles'

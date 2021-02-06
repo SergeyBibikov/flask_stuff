@@ -10,7 +10,6 @@ from .. import login_manager
 @login_manager.user_loader
 def load_user(user_id):
     user = User.query.get(user_id)
-    print(user)
     return user
 
 @auth.route("/login",methods=['POST','GET'])
