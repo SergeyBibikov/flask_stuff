@@ -1,7 +1,7 @@
 {%extends "index.html"%}
 {%block body%}
 {%if not current_user.is_authenticated%}
-    <div class="buttons">
+    <div class="homepage-buttons">
         <button id="signup" type="submit"><a href="/register">Регистрация</a></button>
         <button id="login" type="submit"><a href="/login">Вход</a></button>
     </div>

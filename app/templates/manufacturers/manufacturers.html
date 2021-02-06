@@ -1,6 +1,9 @@
 {%extends 'index.html'%}
 {%block body%}
-{%include "manufacturers/manforms.html"%}
-<b>=================================================</b>
-{%include "manufacturers/manufacturers_list.html"%}
+<div class="man-form-and-list">
+    <section id="manuf_main">
+        {%include "manufacturers/manforms.html"%}
+        {%include "manufacturers/manufacturers_list.html"%}
+    </section>
+</div>
 {%endblock%}

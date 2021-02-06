@@ -13,6 +13,7 @@ from .. import db
 @login_required
 @is_admin
 def manu_facturers():
+    man_num=None
     form_search = ManufacturerSearchForm()
     legal_forms = LegalForm.query.all()
     form_add = ManufacturerAddForm()
@@ -23,7 +24,8 @@ def manu_facturers():
         return render_template("manufacturers/manufacturers.html",
                                 form_search=form_search,
                                 form_add=form_add,
-                                manufacturers_list=manuf_list)
+                                manufacturers_list=manuf_list,
+                                man_num=len(manuf_list))
     elif form_search.find.data and form_search.validate():
         search_string = form_search.manuf_name_search.data.lower()
         if form_search.manuf_name_search.data not in (None,""):
@@ -46,14 +48,16 @@ def manu_facturers():
             form_add.manuf_name_add.errors.append("Производитель уже есть в базе")
             return render_template("manufacturers/manufacturers.html",
                         form_search=form_search,
-                        form_add=form_add)
+                        form_add=form_add,
+                        hide_result=True)
         manuf = Manufacturer(name=form_add.manuf_name_add.data.strip(),legal_form_id=form_add.manuf_legal_form.data)
         db.session.add(manuf)
         db.session.commit()
         flash("Производитель добавлен")
     return render_template("manufacturers/manufacturers.html",
                         form_search=form_search,
-                        form_add=form_add)
+                        form_add=form_add,
+                        hide_result=True)
 
 @manufacturers.route("/manufacturers/<manufacturer_name>",methods=['GET','POST'])
 @is_admin

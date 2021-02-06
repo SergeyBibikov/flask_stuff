@@ -45,7 +45,7 @@ class LoginForm(FlaskForm):
 
 class ManufacturerSearchForm(FlaskForm):
     search_filter = SelectField(choices=["Начинается с","Содержит","Заканчивается на","Все"])
-    manuf_name_search = StringField("Manufacturer search", validators=[InputRequired("Введите строку для поиска")])
+    manuf_name_search = StringField("Поиск производителя", validators=[InputRequired("Введите строку для поиска")])
     find = SubmitField("Найти")
 
 class ManufacturerAddForm(FlaskForm):
