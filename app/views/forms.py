@@ -57,4 +57,6 @@ class ManufacturerEditForm(FlaskForm):
     manuf_enter_name = StringField("Новое название")
     manuf_legal_form = SelectField("Форма регистрации (выберите либо новую, либо текущую)")
     confirm_checkbox = BooleanField("Подтвердить изменение производителя")
+    confirm_delete_checkbox = BooleanField("Подтвердить удаление производителя")
     edit_manuf = SubmitField("Изменить данные производителя")
+    delete_manuf = SubmitField("Удалить производителя")

@@ -6,15 +6,16 @@
         <br>{{form_search.search_filter}}{{ form_search.manuf_name_search }}
 
         {%for error in form_search.manuf_name_search.errors%}
-            <span class="val_errors">{{error}}</span>
+            <br><span class="val_errors">{{error}}</span>
         {%endfor%}
-        {{ form_search.find() }}
-        
+        <br>{{ form_search.find() }}        
     </form>
-    <h4>Добавление производителя</h4>
+    
     <form class="add-manuf-form" method="POST" novalidate>
+        <h4>Добавление производителя</h4>
         {{ form_add.hidden_tag() }}
         <div class='add-fields'>
+            
             <div class="manuf-name">
                 {{ form_add.manuf_name_add.label }}
                 {{ form_add.manuf_name_add }}
@@ -23,7 +24,7 @@
                 {{ form_add.manuf_legal_form.label }}
                 <b>{{ form_add.manuf_legal_form }}</b>
             </div>
-            <span class="add-button">{{ form_add.add() }}</span>
+            {{ form_add.add() }}
         </div>
         
         {%for error in form_add.manuf_name_add.errors%}
