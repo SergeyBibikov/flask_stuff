@@ -54,7 +54,6 @@ list-style: none;
 ==========Админская панель на главной=========== 
  */
  div.admin_panel{
-  width: 15rem;
   font-weight: 800;
   position: absolute;
   right: 5%;

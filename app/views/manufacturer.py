@@ -69,8 +69,12 @@ def edit_manufacturer(manufacturer_name):
     manufacturer = Manufacturer.query.filter_by(name=manufacturer_name).first()
     if not manufacturer:
         return redirect(url_for('.manu_facturers'))
-
-    if form_edit.edit_manuf.data:
+    
+    if form_edit.edit_manuf.data and form_edit.validate() :
+        check_if_exists = Manufacturer.query.filter_by(name=form_edit.manuf_enter_name.data).first()
+        if check_if_exists:
+            form_edit.manuf_enter_name.errors.append("Производитель с таким названием уже существует")
+            return render_template("manufacturers/manufacturer_page.html",manufacturer=manufacturer,form_edit=form_edit)
         if not form_edit.manuf_enter_name.data:
             manufacturer.name=manufacturer.name    
         else:

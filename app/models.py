@@ -10,7 +10,7 @@ class User(db.Model,UserMixin):
     password = db.Column(db.String,nullable=False)
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'), nullable=False, default=1)
     def __repr__(self):
-        return "User (id=%s)" % self.id
+        return f"User (id={self.id})"
 
 class Role(db.Model):
     __tablename__='roles'
@@ -22,13 +22,29 @@ favourites = db.Table('favourites',
     db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
     db.Column('product_id', db.Integer, db.ForeignKey('products.id'), primary_key=True))
 
+class Country(db.Model):
+    __tablename__='countries'
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    name = db.Column(db.String, nullable=False)
+    alpha_2_code = db.Column(db.Integer, nullable=False)
+    alpha_3_code = db.Column(db.Integer, nullable=False)
+    numeric_code = db.Column(db.Integer, nullable=False)
+    products_rel=db.relationship('Product',backref='country',lazy="joined")
+
 class Product(db.Model):
     __tablename__='products'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String,nullable=False)
-    country_of_origin = db.Column(db.String)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'),nullable=False) 
+    country_id = db.Column(db.Integer, db.ForeignKey('countries.id'),nullable=False)
     manufacturer_id = db.Column(db.Integer, db.ForeignKey('manufacturers.id'),
         nullable=False)
+
+class Category(db.Model):
+    __tablename__='categories'
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    name = db.Column(db.String,nullable=False)
+    products_rel=db.relationship('Product',backref='category',lazy="joined")
 
 class Manufacturer(db.Model):
     __tablename__='manufacturers'
