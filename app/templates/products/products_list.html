@@ -1,0 +1,9 @@
+{%extends 'index.html'%}
+{%block body%}
+{%include 'products/product_search.html'%}
+    <ul>
+        {%for product in products_list%}
+            <li class="product">{{product}}</li>
+        {%endfor%}
+    </ul>
+{%endblock%}

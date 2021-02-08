@@ -25,11 +25,13 @@ def create_app():
         from .views.home import home
         from .views.auth import auth
         from .views.manufacturer import manufacturers
+        from .views.products import products
 
         app.register_blueprint(registration)
         app.register_blueprint(home)
         app.register_blueprint(auth)
         app.register_blueprint(manufacturers)
+        app.register_blueprint(products)
 
         return app
 

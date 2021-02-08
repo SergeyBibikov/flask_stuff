@@ -60,3 +60,11 @@ class ManufacturerEditForm(FlaskForm):
     confirm_delete_checkbox = BooleanField("Подтвердить удаление производителя")
     edit_manuf = SubmitField("Изменить данные производителя")
     delete_manuf = SubmitField("Удалить производителя")
+
+class ProductSearchForm(FlaskForm):
+    name = StringField("Название продукта")
+    search_filter = SelectField(choices=["Начинается с",
+                                        "Содержит",
+                                        "Заканчивается на",
+                                        "Полностью совпадает с"])
+    find_product = SubmitField("Найти")
