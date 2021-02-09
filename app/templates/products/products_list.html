@@ -1,9 +1,21 @@
 {%extends 'index.html'%}
 {%block body%}
 {%include 'products/product_search.html'%}
-    <ul>
-        {%for product in products_list%}
-            <li class="product">{{product}}</li>
-        {%endfor%}
-    </ul>
+<table class="products-list">
+    <tr>
+        <th>Название</th>
+        <th>Производитель</th>
+        <th>Категория</th>
+        <th>Страна производства</th>
+    </tr>
+    {%for product in products_list%}
+        <tr>
+            <td>{{product.name}}</td>
+            <td>{{product.manufacturer.name}}</td>
+            <td>{{product.category.name}}</td>
+            <td>{{product.country.name}}</td>
+        </tr>
+    {%endfor%}
+</table>
+
 {%endblock%}

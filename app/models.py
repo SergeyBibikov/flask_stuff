@@ -26,8 +26,8 @@ class Country(db.Model):
     __tablename__='countries'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String, nullable=False)
-    alpha_2_code = db.Column(db.Integer, nullable=False)
-    alpha_3_code = db.Column(db.Integer, nullable=False)
+    alpha_2_code = db.Column(db.String, nullable=False)
+    alpha_3_code = db.Column(db.String, nullable=False)
     numeric_code = db.Column(db.Integer, nullable=False)
     products_rel=db.relationship('Product',backref='country',lazy="joined")
 
@@ -58,3 +58,11 @@ class LegalForm(db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String)
     legal_forms_rel=db.relationship('Manufacturer',backref='legal_form',lazy="joined")
+
+class StatAddToCart(db.Model):
+    __tablename__='stataddtocart'
+    pass
+
+class StatOrdered(db.Model):
+    __tablename__='statordered'
+    pass
