@@ -1,3 +1,6 @@
+from datetime import datetime
+from functools import partialmethod
+
 from sqlalchemy.orm import backref
 from flask_login import UserMixin
 from . import db
@@ -35,10 +38,15 @@ class Product(db.Model):
     __tablename__='products'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String,nullable=False)
+    price = db.Column(db.Float)
+    in_stock_qty = db.Column(db.Integer)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'),nullable=False) 
     country_id = db.Column(db.Integer, db.ForeignKey('countries.id'),nullable=False)
     manufacturer_id = db.Column(db.Integer, db.ForeignKey('manufacturers.id'),
         nullable=False)
+    cart_stats_rel = db.relationship('StatAddToCart',backref='product')
+    order_item_rel = db.relationship('OrderedItem',backref='product')
+    
 
 class Category(db.Model):
     __tablename__='categories'
@@ -61,8 +69,30 @@ class LegalForm(db.Model):
 
 class StatAddToCart(db.Model):
     __tablename__='stataddtocart'
-    pass
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    quantity = db.Column(db.Integer,nullable=False)
+    time_stamp = db.Column(db.DateTime,nullable=False,default=datetime.now())
 
-class StatOrdered(db.Model):
-    __tablename__='statordered'
-    pass
+
+class Order(db.Model):
+    __tablename__='orders'
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    creation_time= db.Column(db.DateTime,nullable=False,default=datetime.now())
+    is_paid = db.Column(db.Boolean)
+    total_sum = db.Column(db.Float)
+    payment_sum = db.Column(db.Float)
+    payment_time = db.Column(db.DateTime)
+    is_cancelled = db.Column(db.Boolean)
+    cancellation_time = db.Column(db.DateTime,nullable=False,default=datetime.now())
+
+class OrderedItem(db.Model):
+    __tablename__='ordereditems'
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    price_on_purchase = db.Column(db.Float,nullable=False)
+    quantity = db.Column(db.Integer,nullable=False)
+
+
+    
