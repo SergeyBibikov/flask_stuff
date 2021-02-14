@@ -1,4 +1,4 @@
-<form method="POST" novalidate>
+<form class='login-form' method="POST" novalidate>
     {{ form.hidden_tag() }}
     <br><span class="username">Имя пользователя</span>
     <br>{{ form.username }}
@@ -7,5 +7,5 @@
     {%if form.password.errors or form.username.errors %}
        <br> <span class="val_errors">Некорректное имя пользователя или пароль</span>
     {%endif%}
-    <br>{{ form.submit() }}
+    <br>{{ form.submit(class="btn") }}
 </form>

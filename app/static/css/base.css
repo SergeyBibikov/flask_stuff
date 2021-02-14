@@ -1,6 +1,7 @@
 /*
  =================Общие стили=========== 
  */
+ @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 *{
   margin:0;
   padding:0;
@@ -8,23 +9,22 @@
 
 html {
   font-size: 62.5%;
-  color:black;
-  background-color: whitesmoke;
+  color:rgba(78, 76, 76, 0.918);
+  background-color:#FCF6F5FF;
   font-family: "Courier New";
 }
 body{
   font-size: 1.6rem;
 }
-header{
-  background-color: rgb(8, 6, 39);
-  height: 10%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
+.flashes li{
+  color: rgb(119, 137, 219);
+  font-weight: bold;
 }
-div.home_logout{
-  display: flex;
-  justify-content: flex-end;
+
+.val_errors{
+  color:rgb(233, 96, 46);
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 table{
   text-align: left;
@@ -41,43 +41,98 @@ a:hover{
 }
 
 li{
-list-style: none;
+  list-style: none;
+  }
+
+.btn{
+  border:none;
+  padding: 3px;
+  border-radius: 10%;
+  color:#FCF6F5FF; 
+  background-color: #89ABE3FF;
 }
+.btn:active{
+  box-shadow: 0 0 0 2px rgb(0, 183, 255);
+}
+/*
+===================Header================ 
+ */
+header{
+  background-color: #89ABE3FF;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.logo{
+  margin-left: 5px;
+  font-family: 'Lobster', cursive;
+  font-size: 3rem;
+  color: #FCF6F5FF;
+}
+header a{
+  color: #FCF6F5FF;
+  font-weight: bold;
+  padding: 5px;
+}
+header div{
+  display: flex;
+  align-items: center;
+}
+
+.home.link,.logout.link,.cart.link,.cart-size{
+  color: #FCF6F5FF;
+  font-weight: bold;
+  padding: 5px;
+}
+div.home_logout{
+  display: flex;
+  justify-content: flex-end;
+}
+
 .cart{
   color: aliceblue;
 }
-.flashes li{
-  color: rgb(119, 137, 219);
-  font-weight: bold;
-}
-
-.val_errors{
-  color:rgb(233, 96, 46);
-  font-size: 1.4rem;
-  font-weight: bold;
-}
 
 /*
-==========Админская панель на главной=========== 
+==========Админка=========== 
  */
  div.admin_panel{
   font-weight: 800;
   position: absolute;
   right: 5%;
 }
-ul.nav-links li a{
+ .admin_panel ul.nav-links li a{
   font-size: 1.6rem;
   color:rgb(113, 159, 197);
   text-decoration: none;
 }
 
-ul.nav-links li a:hover{
+.admin_panel ul.nav-links li a:hover{
   text-decoration: underline;
   color: darkslateblue;
 }
+
 /*
-===========Страница авторизации================== 
+===========Страница регистрации================== 
  */
+.registration-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.registration-form{
+  margin-top: 10px;
+}
+/*
+============Страница авторизации================== 
+ */
+ .login-container{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
  .email, .password, .password2, .username{
   font-weight: bold;
   font-size: 1.6rem;

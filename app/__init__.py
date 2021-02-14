@@ -26,6 +26,7 @@ def create_app():
         from .views.manufacturer import manufacturers
         from .views.products import products
         from .views.api import api
+        from .views.admin import admin
 
         app.register_blueprint(registration)
         app.register_blueprint(home)
@@ -33,7 +34,8 @@ def create_app():
         app.register_blueprint(manufacturers)
         app.register_blueprint(products)
         app.register_blueprint(api)
-
+        app.register_blueprint(admin)
+        
         return app
 
 

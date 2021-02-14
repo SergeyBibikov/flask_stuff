@@ -1,4 +1,4 @@
-<form method="POST" novalidate>
+<form class="registration-form" method="POST" novalidate>
     <span class="email">{{ form.email.label }}</span>
     <br>{{form.email}}
     {%for error in form.email.errors %}
@@ -19,6 +19,6 @@
     {%for error in form.conf_password.errors %}
         <span class="val_errors">{{error}}</span>
     {%endfor%}
-    <br>{{ form.submit() }}
+    <br>{{ form.submit(class='btn') }}
     {{ form.hidden_tag() }}
 </form>
