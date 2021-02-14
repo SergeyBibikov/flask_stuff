@@ -1,0 +1,6 @@
+<form method="POST">
+    {{form.current_qty.label}} <br> {{form.current_qty(value=qty,disabled=True)}}
+    {{form.quantity.label}}<br>{{form.quantity(product=product)}}
+    {{form.edit_quantity(product=product)}}
+    {{form.delete_item(product=product)}}    
+</form>

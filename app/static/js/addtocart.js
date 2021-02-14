@@ -16,7 +16,7 @@ function do_stuff(){
     )
 }
 function read_response(resp){
-    $('.cart-size').html(function(i, val) { return +val+1 });
+    $('.cart-size').html(function(i, val) {return + val+1 });
     alert(jQuery.parseJSON(resp)["success"]);
 }
 function handle_error(first,_unimportant,_ignore){

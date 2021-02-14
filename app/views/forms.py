@@ -1,6 +1,9 @@
+from itertools import product
+from flask_migrate import edit
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField,BooleanField
-from wtforms.validators import InputRequired,DataRequired, Email, EqualTo, ValidationError
+from wtforms.fields.core import IntegerField
+from wtforms.validators import InputRequired,DataRequired, Email, EqualTo, NumberRange, ValidationError
 from ..models import User
 from ..utils.passw_hash import is_passw_correct
 
@@ -68,3 +71,11 @@ class ProductSearchForm(FlaskForm):
                                         "Заканчивается на",
                                         "Полностью совпадает с"])
     find_product = SubmitField("Найти")
+
+class CartEditItemForm(FlaskForm):
+    product_id = IntegerField()
+    current_qty=IntegerField('Количество в корзине')
+    stock_qty=IntegerField()
+    quantity = IntegerField('Новое количество',validators=[NumberRange(min=1)])
+    edit_quantity = SubmitField('Изменить количество')
+    delete_item = SubmitField('Удалить из корзины')

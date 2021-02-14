@@ -16,9 +16,20 @@
             <span>Dummy</span>
         </div>
         {%block header%}
-        <div class="cart">
-            <a class="cart link" href="/cart">Корзина </a><span class="cart-size">({{session['cart-size']}})</span>
+        <div class="header-center">
+            <div class="cart">
+                <a class="cart link" href="/cart">Корзина </a>
+                <p>(</p><span class="cart-size">{{session['cart-size']}}</span><p>)</p>
+            </div>
         </div>
+        {%if current_user.is_authenticated and session.get('role')=='ADMIN' 
+        and url_for(request.endpoint) !='/adminpage'%}
+        <div class="header-admin">
+            <div class="admin-page">
+                <a href="/adminpage" class="admin-page link">Админка</a>
+            </div>
+        </div>
+        {%endif%}
         <div class="home_logout">
             <div class="home">
                 <a class="home link" href="/home">На главную</a>
@@ -37,13 +48,7 @@
             </div>    
             {%endif%}
         </div>
-        {%if current_user.is_authenticated and session.get('role')=='ADMIN' 
-        and url_for(request.endpoint) !='/adminpage'%}
-        <div class="admin-page">
-            <a href="/adminpage" class="admin-page link">Админка</a>
-        </div>
-        {%endif%}
-
+        
         {%endblock%}
     </header>
     {%block scripts%}

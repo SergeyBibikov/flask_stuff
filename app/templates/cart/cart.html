@@ -1,0 +1,29 @@
+{%extends 'index.html'%}
+{%block body%}
+{% if cart%}
+<table class="cart-table">
+    <tr>
+        <th>Наименование</th>
+        <th>Сейчас в корзине</th>
+        <th>Всего в наличии</th>
+        <th>Новое количество</th>
+    </tr>
+    {%for item in cart%}
+    {% set product = item[0].id %}
+    <tr product="{{product}}">
+        <td class="cart-product-name" product="{{product}}">{{item[0].name}}</td>
+        {{form.product_id(value=product,hidden=True)}}
+        <td class="cart-current-qty" product="{{product}}">{{form.current_qty(value=item[1],disabled=True)}}</td>
+        <td class="cart-stock-qty" product="{{product}}">{{form.stock_qty(disabled=True,value=item[0].in_stock_qty)}}</td>
+        <td class="cart-new-qty" product="{{product}}">{{form.quantity(product=product)}}</td>
+        <td product="{{product}}"><form method="POST">{{form.edit_quantity(product=product)}}
+            {{form.delete_item(product=product)}}</form> </td>
+    </tr>
+    {%endfor%} 
+</table>   
+
+{%endif%}
+{%endblock%}
+{%block scripts%}
+    <script src="{{url_for('static',filename='./js/cart_delete.js')}}"></script>
+{%endblock%}

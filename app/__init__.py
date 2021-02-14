@@ -1,5 +1,6 @@
 import os
-from flask import Flask
+import json
+from flask import Flask,session,request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager, login_manager
@@ -19,6 +20,15 @@ def create_app():
     migrate.init_app(app,db)
     login_manager.init_app(app)
 
+    @app.before_request
+    def init_add_cart():
+        cart_cookie = request.cookies.get('cart')
+        if cart_cookie:
+            cart = json.loads(request.cookies.get('cart'))
+            session['cart-size'] = len(cart)
+        else:
+            session['cart-size'] = 0
+
     with app.app_context():
         from .views.registration import registration
         from .views.home import home
@@ -27,6 +37,7 @@ def create_app():
         from .views.products import products
         from .views.api import api
         from .views.admin import admin
+        from .views.cart import cart
 
         app.register_blueprint(registration)
         app.register_blueprint(home)
@@ -35,6 +46,7 @@ def create_app():
         app.register_blueprint(products)
         app.register_blueprint(api)
         app.register_blueprint(admin)
+        app.register_blueprint(cart)
         
         return app
 
