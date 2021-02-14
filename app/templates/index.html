@@ -16,7 +16,9 @@
             <img src="{{url_for('static',filename='./images/logo.svg')}}" alt="Dummy">
         </div>
         {%block header%}
-       
+        <div class="cart">
+            <span>Cart (</span><span class="cart-size">{{session['cart-size']}}</span><span>)</span>
+        </div>
         <div class="home_logout">
             <div class="home">
                 <a href="/home"><img src="{{url_for('static',filename='./images/home.svg')}}" alt="Домой"></a>
@@ -31,7 +33,7 @@
         {%endblock%}
     </header>
     {%block scripts%}
-    
+        <script src="{{url_for('static',filename='./js/addtocart.js')}}"></script>
     {%endblock%}
     {% block body %}
 

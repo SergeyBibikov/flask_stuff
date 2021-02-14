@@ -1,0 +1,6 @@
+{%for product in products%}
+    <form class="some" action='javascript:void(0);'>
+        <input type="text" name="quantity" id="add-quantity" product_id="{{product.id}}">
+        <button class="add-to-cart" product_id="{{product.id}}">Add to cart</button>
+    </form>
+{%endfor%}

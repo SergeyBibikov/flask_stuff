@@ -43,7 +43,9 @@ a:hover{
 li{
 list-style: none;
 }
-
+.cart{
+  color: aliceblue;
+}
 .flashes li{
   color: rgb(119, 137, 219);
   font-weight: bold;

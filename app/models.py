@@ -7,7 +7,7 @@ from . import db
 
 class User(db.Model,UserMixin):
     __tablename__='users'
-    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True,autoincrement=False)
     email = db.Column(db.String,nullable=False)
     username = db.Column(db.String,nullable=False)
     password = db.Column(db.String,nullable=False)
@@ -27,7 +27,7 @@ favourites = db.Table('favourites',
 
 class Country(db.Model):
     __tablename__='countries'
-    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True,autoincrement=False)
     name = db.Column(db.String, nullable=False)
     alpha_2_code = db.Column(db.String, nullable=False)
     alpha_3_code = db.Column(db.String, nullable=False)
@@ -36,7 +36,7 @@ class Country(db.Model):
 
 class Product(db.Model):
     __tablename__='products'
-    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True,autoincrement=False)
     name = db.Column(db.String,nullable=False)
     price = db.Column(db.Float)
     in_stock_qty = db.Column(db.Integer)
@@ -50,7 +50,7 @@ class Product(db.Model):
 
 class Category(db.Model):
     __tablename__='categories'
-    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True,autoincrement=False)
     name = db.Column(db.String,nullable=False)
     products_rel=db.relationship('Product',backref='category',lazy="joined")
 
@@ -73,7 +73,6 @@ class StatAddToCart(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     quantity = db.Column(db.Integer,nullable=False)
     time_stamp = db.Column(db.DateTime,nullable=False,default=datetime.now())
-
 
 class Order(db.Model):
     __tablename__='orders'
