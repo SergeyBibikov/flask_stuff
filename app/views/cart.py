@@ -33,7 +33,6 @@ def the_cart():
         return resp
 
     if form.edit_quantity.data:
-        form.validate()
         print(request.form.to_dict(flat=False))
         cookie_cart[f'product_{form.product_id.data}']['qty']=form.quantity.data
         cart_dict_html[f'product_{form.product_id.data}']['qty']=form.quantity.data

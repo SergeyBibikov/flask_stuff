@@ -20,12 +20,14 @@
             <li class="cart-product-name" product="{{product}}">{{product_obj.name}}</li>
             <li class="cart-current-qty" product="{{product}}">{{form.current_qty(value=qty,disabled=True)}}</li>
             <li class="cart-stock-qty" product="{{product}}">{{form.stock_qty(disabled=True,value=product_obj.in_stock_qty)}}</li>
-        </ul>    
+            <li>
                 <form method="POST">
-                     {{form.quantity(product=product)}}
-                     {{form.product_id(value=product,hidden=True)}}{{form.edit_quantity(product=product)}}
-                     {{form.delete_item(product=product)}}
-                </form>
+                    {{form.quantity(product=product)}}
+                    {{form.product_id(value=product,hidden=True)}}{{form.edit_quantity(product=product)}}
+                    {{form.delete_item(product=product)}}
+               </form>
+            </li>
+        </ul>    
                
             {%for error in form.quantity.errors%}
             {{error}}

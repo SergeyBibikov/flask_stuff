@@ -75,6 +75,6 @@ class CartEditItemForm(FlaskForm):
     product_id = IntegerField()
     current_qty=IntegerField('Количество в корзине')
     stock_qty=IntegerField()
-    quantity = IntegerField('Новое количество')
+    quantity = IntegerField('Новое количество',validators=[NumberRange(min=0)])
     edit_quantity = SubmitField('Изменить количество')
     delete_item = SubmitField('Удалить из корзины')

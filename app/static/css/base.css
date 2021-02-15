@@ -221,29 +221,30 @@ div.home_logout{
 ===========Корзина==========  
  */
 .cart-cart{
-  width: 80%;
+  width: 60%;
   margin: auto;
   display:flex;
   flex-direction: column;
 }
-.cart-cart li{
+/* .cart-cart li{
   margin:0 5px 0 5px;
-}
+} */
 #current_qty,#stock_qty,#quantity{
-  width: 40px;
+  width: 60px;
 }
-.cart-headers-container{
 
-}
 .cart-headers-container ul,.cart-items-container ul{
-  width: 50%;
-  display:flex;
-  justify-content: space-between;
-  margin: 3px 0 3px 0;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1.5fr;
+  /* margin: 3px 0 3px 0; */
 }
 .cart-items form{
-  display: flex;
+  display: inline-flex;
 }
+/* .cart-items form *{
+  margin:2px;
+} */
+
 
 
 
