@@ -16,8 +16,11 @@ function do_stuff(){
     )
 }
 function read_response(resp){
-    $('.cart-size').html(function(i, val) {return + val+1 });
-    alert(jQuery.parseJSON(resp)["success"]);
+    message = jQuery.parseJSON(resp)["success"];
+    if (message=='The product was added to cart'){
+        $('.cart-size').html(function(i, val) {return + val+1 });
+    }
+    alert(message);
 }
 function handle_error(first,_unimportant,_ignore){
     alert(jQuery.parseJSON(first.responseText)["error"]);

@@ -3,32 +3,30 @@ from flask import Flask,render_template,request,redirect,make_response,flash,jso
 import json
 
 api = Blueprint('api',__name__)
-cart_cookie_lifetime=604800
+CART_COOKIE_LIFETIME =604800
 
 @api.route('/addtocart', methods=['POST'])
 def add_to_cart():
-    global cart_cookie_lifetime
+    global CART_COOKIE_LIFETIME
     added_object = request.get_json()
-    added_product = added_object.get("product")
-    current_cart=request.cookies.get('cart')
+    added_product = added_object.get('product')
+    added_qty = added_object.get('qty')
+    current_cart = request.cookies.get('cart')
+
     if not current_cart:
-        cart_cookie = json.dumps([added_object])
+        cart_cookie = json.dumps({f'product_{added_product}':{"id":added_product,"qty":added_qty}})
         resp = make_response(json.dumps({"success":"The product was added to cart"}))
-        resp.set_cookie('cart', cart_cookie, max_age=cart_cookie_lifetime, samesite='Lax')
+        resp.set_cookie('cart', cart_cookie, max_age=CART_COOKIE_LIFETIME, samesite='Lax')
         return resp
-    cart_in_cookies = json.loads(current_cart)    
-    if is_product_present(cart_in_cookies,added_product):
-        return  make_response(json.dumps({"error":"The product is already in the cart"}),409)
-    cart_in_cookies.append(added_object)
+
+    cart_in_cookies = json.loads(current_cart) 
+
+    if f'product_{added_product}' in cart_in_cookies:
+        resp = make_response(json.dumps({"success":"The product was altered"}))
+    else:
+        resp = make_response(json.dumps({"success":"The product was added to cart"}))
+        
+    cart_in_cookies[f'product_{added_product}'] = {"id":added_product,"qty":added_qty}
     new_cookie = json.dumps(cart_in_cookies)
-    resp = make_response(json.dumps({"success":"The product was added to cart"}))
-    resp.set_cookie('cart', new_cookie, max_age=cart_cookie_lifetime, samesite='Lax')
-    return resp
-
-
-
-def is_product_present(cart,pr_id):
-    for d in cart:
-        if d.get('product') == pr_id:
-            return True
-    return False
+    resp.set_cookie('cart', new_cookie, max_age=CART_COOKIE_LIFETIME, samesite='Lax')
+    return resp 

@@ -1,4 +1,3 @@
-from itertools import product
 from flask_migrate import edit
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField,BooleanField
@@ -76,6 +75,6 @@ class CartEditItemForm(FlaskForm):
     product_id = IntegerField()
     current_qty=IntegerField('Количество в корзине')
     stock_qty=IntegerField()
-    quantity = IntegerField('Новое количество',validators=[NumberRange(min=1)])
+    quantity = IntegerField('Новое количество')
     edit_quantity = SubmitField('Изменить количество')
     delete_item = SubmitField('Удалить из корзины')
