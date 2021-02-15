@@ -220,12 +220,31 @@ div.home_logout{
 /*
 ===========Корзина==========  
  */
- .cart-table .cart-current-qty input,
- .cart-table .cart-stock-qty input,
- .cart-table .cart-new-qty input{
-   text-align: center;
-   width: 40px;
- }
+.cart-cart{
+  width: 80%;
+  margin: auto;
+  display:flex;
+  flex-direction: column;
+}
+.cart-cart li{
+  margin:0 5px 0 5px;
+}
+#current_qty,#stock_qty,#quantity{
+  width: 40px;
+}
+.cart-headers-container{
+
+}
+.cart-headers-container ul,.cart-items-container ul{
+  width: 50%;
+  display:flex;
+  justify-content: space-between;
+  margin: 3px 0 3px 0;
+}
+.cart-items form{
+  display: flex;
+}
+
 
 
 

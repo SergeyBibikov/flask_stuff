@@ -1,30 +1,41 @@
 {%extends 'index.html'%}
 {%block body%}
 {% if cart%}
-<table class="cart-table">
-    <tr>
-        <th>Наименование</th>
-        <th>Сейчас в корзине</th>
-        <th>Всего в наличии</th>
-        <th>Новое количество</th>
-    </tr>
-    {%for item in cart%}
-    {% set product = item["product"].id %}
-    <tr product="{{product}}">
-        <td class="cart-product-name" product="{{product}}">{{item["product"].name}}</td>
-        <td class="cart-current-qty" product="{{product}}">{{form.current_qty(value=item["qty"],disabled=True)}}</td>
-        <td class="cart-stock-qty" product="{{product}}">{{form.stock_qty(disabled=True,value=item["product"].in_stock_qty)}}</td>
-        <td class="cart-new-qty" product="{{product}}">{{form.quantity(product=product)}}</td>
-        <td product="{{product}}"><form method="POST">{{form.edit_quantity(product=product)}}
-            {{form.product_id(value=product,hidden=True)}}
-            {{form.delete_item(product=product)}}</form> </td>
-        {%for error in form.quantity.errors%}
-        {{error}}
-        {%endfor%}
-    </tr>
-    {%endfor%} 
-</table>   
-
+<div class="cart-cart">
+    <div class="cart-headers-container">
+        <ul class="cart-headers">
+            <li class="cart-header">Наименование</li>
+            <li class="cart-header">Сейчас в корзине</li>
+            <li class="cart-header">Всего в наличии</li>
+            <li class="cart-header">Новое количество</li>
+            <li></li>
+        </ul>
+    </div> 
+    <div class="cart-items-container">
+        {%for item in cart.items()%}
+        {% set product_obj=item[1]["product"] %}
+        {% set qty = item[1]["qty"] %}
+        {% set product = product_obj.id %}
+        <ul class="cart-items" product="{{product}}">
+            <li class="cart-product-name" product="{{product}}">{{product_obj.name}}</li>
+            <li class="cart-current-qty" product="{{product}}">{{form.current_qty(value=qty,disabled=True)}}</li>
+            <li class="cart-stock-qty" product="{{product}}">{{form.stock_qty(disabled=True,value=product_obj.in_stock_qty)}}</li>
+        </ul>    
+                <form method="POST">
+                     {{form.quantity(product=product)}}
+                     {{form.product_id(value=product,hidden=True)}}{{form.edit_quantity(product=product)}}
+                     {{form.delete_item(product=product)}}
+                </form>
+               
+            {%for error in form.quantity.errors%}
+            {{error}}
+            {%endfor%}
+        
+        {%endfor%} 
+    </div>
+</div>   
+{%else%}
+    <h3>Корзина пуста</h3>
 {%endif%}
 {%endblock%}
 {%block scripts%}
